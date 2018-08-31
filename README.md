@@ -13,7 +13,7 @@ To use in your browser:
 ```JS
   import * as Tree, from '@scriptleaf/treejs'
   // or
-  import Tree, {createElement, etc} from '@scriptleaf/treejs'
+  import Tree, {createElement, ...etc} from '@scriptleaf/treejs'
 ```
 
 ## Creating elements

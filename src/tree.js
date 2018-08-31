@@ -1,14 +1,13 @@
 /* global Element */
 
-import ComponentTemplate, {Templates} from './templates'
+import ComponentTemplate, {assignAttributes} from './templates'
+import {setState, getState, bindState} from './state'
 
 var Tree = {
   id: {},
   class: {},
   node: {}
 }
-
-var State = {}
 
 function createElement () {
   let tagName = 'div'
@@ -60,95 +59,6 @@ function createNode (text, parentElement, id) {
   if (id) Tree.node[id] = node
   node.bindState = bindState
   return node
-}
-
-function bindState (stateKey) {
-  if (State[stateKey] === undefined) {
-    newState(stateKey)
-    State[stateKey].nodes.push(this)
-  } else if (Array.isArray(State[stateKey].nodes) === false) {
-    return false
-  } else {
-    State[stateKey].nodes.push(this)
-    this.textContent = State[stateKey].value
-    return true
-  }
-}
-
-function newState (stateKey, stateValue) {
-  State[stateKey] = {
-    nodes: [],
-    value: stateValue || '',
-    get: function () {
-      return this.value
-    },
-    set: function (newValue) {
-      this.value = newValue
-      this.nodes.forEach(node => {
-        if (node.nodeType === 3) node.textContent = newValue
-        else if (node.tagName === 'input') node.value = newValue
-        else if (node.stateHTML) node.innerHTML = newValue
-        else node.innerText = newValue
-      })
-    }
-  }
-  return true
-}
-
-function assignAttributes (elem, attributes) {
-  if (attributes.$) assignParts(elem, attributes.$)
-  if (attributes.template && Templates[attributes.template]) createComponent(elem, attributes.template)
-  delete attributes.$
-  for (let attr in attributes) {
-    if (attributes[attr][0] === '$' && attributes[attr][0].includes(' ') === false) bindPart(elem, attr, attributes[attr])
-    else elem[attr] = attributes[attr]
-  }
-}
-
-function createComponent (elem, template) {
-  assignAttributes(elem, Templates[template].attributes)
-  Templates[template].children.forEach(child => {
-    createElement(child, elem)
-  })
-}
-
-function assignParts (elem, attributes) {
-  elem.$ = {}
-  for (let $ in attributes) {
-    elem.$[$] = {
-      value: attributes[$],
-      nodes: new Map(),
-      get: function () { return true },
-      set: function (newValue) {
-        this.value = newValue
-        for (let [key, value] of this.nodes.entries()) {
-          key[value] = this.value
-        }
-      }
-    }
-  }
-}
-
-function bindPart (elem, key, part) {
-  let parsedPart = part.replace('$', '')
-  let parent = elem.parentElement
-  while ((!parent.$ || !parent.$[parsedPart]) && parent !== document.body) {
-    parent = elem.parentElement
-  }
-  if (parent.$[parsedPart]) {
-    elem[key] = parent.$[parsedPart].value
-    if (parent.$[parsedPart].has(elem)) parent.$[parsedPart].get(elem).push(key)
-    else parent.$[parsedPart].set(elem, [key])
-  }
-}
-
-function setState (stateKey, stateValue) {
-  if (State[stateKey] === undefined) newState(stateKey, stateValue)
-  else State[stateKey] = stateValue
-}
-
-function getState (stateKey) {
-  return State[stateKey]
 }
 
 export {createElement, createElements, createNode, Tree, setState, getState, ComponentTemplate}
