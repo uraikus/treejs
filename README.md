@@ -28,6 +28,7 @@ Arguments will be detected by their type. Allowing you to use them in any order.
 
 **parentElement**: defaults to document.body. The element to which this will be appended to.
 ```JS
+  import {createElement} from '@scriptleaf/treejs'
   // <h1 id="1">Hello World!</h1> // Appends to body due to no parent Element being defined
   let h1 = createElement('h1', {innerText: 'Hello World!', id: 'sample1'})
   // <h1 id="1">Hello World!<h2><b>Hello World Again!</b></h2></h1>
@@ -40,6 +41,7 @@ Arguments will be detected by their type. Allowing you to use them in any order.
 
 Shorthand for createElement(). **Hint:** *Use 'tagName' in object to give it a particular tagName.*
 ```JS
+  import {createElements, createElement} from '@scriptleaf/treejs'
   createElements([
     {tagName: 'h1', innerText: 'Hello World!'},
     {tagName: 'input', value: '', placeholder: 'click to enter value...'}
@@ -71,22 +73,26 @@ Allows you to create several children.
 #### createNode (text:string, parentElement:htmlNode, id:string)
 State nodes are textNodes with extended methods that can be bound to a state.
 ```JS
+  import {createElement, createNode} from '@scriptleaf/treejs'
   let div = createElement()
   createNode('Some random text!', div, 'exampleNode')
 ```
 to get the above text node you can use the **tree** object:
 ```JS
+  import Tree from '@scriptleaf/treejs'
   tree.nodes.exampleNode.textContent = "Something new!"
   let exampleNodeId = 'exampleNode'
   tree.nodes[exampleNodeId].textContent = 'Something new again!'
 ```
 You can also bind a state node to a state key: // *State will be explained further later...*
 ```JS
+  import {createNode} from '@scriptleaf/treejs'
   let node = createNode() // Node will by default be appended to the body if no parentElement
   node.bindState('stateKey')
 ```
 Now anytime the state 'stateKey' is updated, this node will also change. Regular elements can also be bound to a state:
 ```JS
+  import {createElement} from '@scriptleaf/treejs'
   createElement({state: 'stateKey'}) // Only innerText will apply the state
   createElement({stateHTML: 'stateKey'}) // Will apply the state value as html
   createElement().bindState('stateKey') // Only innerText will apply the state
@@ -96,6 +102,7 @@ Now anytime the state 'stateKey' is updated, this node will also change. Regular
 #### setState (stateKey:string, stateValue:string)
 Modify the global state.
 ```JS
+  import {setState, createNode} from '@scriptleaf/treejs'
   setState('stateKey', 'Hello World!')
   let node = createNode().bindState('stateKey') // Will equal "Hello World!"
   setState('stateKey', 'Hello World 2!') // Node textContent will dynamically change to "Hello World 2!"
@@ -103,6 +110,7 @@ Modify the global state.
 #### getState (stateKey:string)
 Get a key's value from the global state.
 ```JS
+  import {setState, getState} from '@scriptleaf/treejs'
   setState('stateKey', 'Hello World!')
   getState('stateKey') // returns "Hello World!"
 ```
@@ -110,7 +118,7 @@ Get a key's value from the global state.
 ## Tree
 The tree object contains all elements created by id, className, or state nodes.
 ```JS
-  import Tree, {createElement} from '@scriptleaf/treejs'
+  import Tree, {createElement, createNode} from '@scriptleaf/treejs'
   let elem1 = createElement({id: 'testElement1'})
   Tree.id['testElement1'] // Returns elem1
   Tree.id.testElement1 // Returns elem1
@@ -127,12 +135,13 @@ The tree object contains all elements created by id, className, or state nodes.
 #### ComponentTemplate (name:string, defaultAttributes:object)
 Component Templates allow you to create reusable html components.
 ```JS
-  import {ComponentTemplate, createElement} from '@scriptleaf/treejs'
+  import {ComponentTemplate} from '@scriptleaf/treejs'
   new ComponentTemplate('sample', {tagName: 'p'})
 ```
 ##### Use Template
 To create a component with the new template, use:
 ```JS
+  import {createElement} from '@scriptleaf/treejs'
   createElement({template: 'sample', id: 'sample1'})
   createElements([{template: 'sample', id: 'sample2'}, {template: 'sample', id: 'sample3'}])
   // or as an element method
@@ -142,6 +151,7 @@ To create a component with the new template, use:
 ##### children
 To add children to the template, you can do the following:
 ```JS
+  import {ComponentTemplate} from '@scriptleaf/treejs'
   new ComponentTemplate('sample', {tagName: 'p'}).children = [
     {tagName: 'h1', innerText: 'Hello World!'},
     {innerText: 'Div element content'}
@@ -151,6 +161,7 @@ To add children to the template, you can do the following:
 ##### dynamic children values
 You can allow dynamic values in the templates by attaching variables to the $ object on element creation. This value when changed will also change the children's values as well.
 ```JS
+  import {ComponentTemplate, createElement} from '@scriptleaf/treejs'
   new ComponentTemplate('sample', {tagName: 'p'}).children = [
     {tagName: 'h1', innerText: '$header'},
     {innerText: '$content'}
