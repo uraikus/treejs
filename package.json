@@ -1,0 +1,30 @@
+{
+  "name": "treejs",
+  "version": "0.1.0",
+  "description": "TreeJS aims to add state, dynamic element creation, and more in a vanilla Javascript familiar syntax.",
+  "main": "tree.js",
+  "scripts": {
+    "build": "parcel src/tree.js -d ./ --out-file tree.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uraikus/treejs.git"
+  },
+  "keywords": [
+    "javascript",
+    "vanilla",
+    "syntax",
+    "sugar"
+  ],
+  "author": "Patrick Trester",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uraikus/treejs/issues"
+  },
+  "homepage": "https://github.com/uraikus/treejs#readme",
+  "dependencies": {
+    "node-sass": "^4.9.3",
+    "parcel-bundler": "^1.9.7"
+  },
+  "organization": "https://scriptleaf.com"
+}
