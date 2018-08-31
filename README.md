@@ -4,11 +4,14 @@
 TreeJS aims to add state, dynamic element creation, and more in a vanilla Javascript familiar syntax.
 
 ## Creating elements
-Elements are now create with **createElement(tagname :string, attributes :object, parentElement :element)**: // *returns newly created element*
+Elements are now create with **createElement(tagname, attributes, parentElement)**: // *returns newly created element*
 ```Javascript
-  let h1 = createElement('h1', {innerText: 'Hello World!'}) // <h1>Hello World!</h1>
+  // <h1 id="1">Hello World!</h1> // Appends to body due to no parent Element being defined
+  let h1 = createElement('h1', {innerText: 'Hello World!', id: 'sample1'})
+  // <h1 id="1">Hello World!<h2><b>Hello World Again!</b></h2></h1>
   createElement({tagName: 'h2', innerHTML: '<b>Hello World Again!</b>'}, h1)
-  let div = createElement() // Default tag is a div, auto appended to body if parent not defined
+  // Default tag is a div, auto appended to body if parent undefined/false/null/0/''
+  let div = createElement()
 ```
 Multiple elements can be created at the same time by using **createElements(attributes :object, parentElement :element)**: // *returns array of newly created elements*
 ```Javascript
