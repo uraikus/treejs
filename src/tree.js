@@ -1,6 +1,6 @@
 /* global Element */
 
-import ComponentTemplate, {assignAttributes} from './templates'
+import {assignAttributes, ComponentTemplate} from './templates'
 import {setState, getState, bindState} from './state'
 
 var Tree = {

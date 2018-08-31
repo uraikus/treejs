@@ -2,7 +2,7 @@ import {createElement} from './tree'
 
 var Templates = {}
 
-export default class ComponentTemplate {
+class ComponentTemplate {
   constructor (name, defaultAttributes) {
     Templates[name] = this
     this.attributes = defaultAttributes
@@ -56,4 +56,4 @@ function assignAttributes (elem, attributes) {
   }
 }
 
-export {assignAttributes}
+export {assignAttributes, ComponentTemplate}
