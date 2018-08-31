@@ -20,7 +20,6 @@ function createElement () {
   }
   if (attributes.tagName) {
     tagName = attributes.tagName
-    delete attributes.tagName
   }
 
   let elem = document.createElement(tagName)

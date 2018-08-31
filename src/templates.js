@@ -41,8 +41,8 @@ function bindPart (elem, key, part) {
   }
   if (parent.$[parsedPart]) {
     elem[key] = parent.$[parsedPart].value
-    if (parent.$[parsedPart].has(elem)) parent.$[parsedPart].get(elem).push(key)
-    else parent.$[parsedPart].set(elem, [key])
+    if (parent.$[parsedPart].nodes.has(elem)) parent.$[parsedPart].nodes.get(elem).push(key)
+    else parent.$[parsedPart].nodes.set(elem, [key])
   }
 }
 
@@ -51,6 +51,7 @@ function assignAttributes (elem, attributes) {
   if (attributes.template && Templates[attributes.template]) createComponent(elem, attributes.template)
   delete attributes.$
   for (let attr in attributes) {
+    if (attr === 'tagName') continue
     if (attributes[attr][0] === '$' && attributes[attr][0].includes(' ') === false) bindPart(elem, attr, attributes[attr])
     else elem[attr] = attributes[attr]
   }
