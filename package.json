@@ -1,6 +1,6 @@
 {
   "name": "@scriptleaf/treejs",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "TreeJS aims to add state, dynamic element creation, and more in a vanilla Javascript familiar syntax.",
   "main": "tree.js",
   "scripts": {
