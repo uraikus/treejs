@@ -6,6 +6,8 @@ var tree = {
   node: {}
 }
 
+var State = {}
+
 function createElement (tagName, attributes, parentElement) {
   if (typeof tagName === 'object') {
     parentElement = attributes
@@ -27,17 +29,20 @@ function createElement (tagName, attributes, parentElement) {
   }
   parentElement.appendChild(elem)
   elem.createChild = createElement
-  elem.createChildren = createChildren
+  elem.createChildren = createElements
   elem.createTextNode = createNode
+  elem.bindState = bindState
+  if (attributes.state || attributes.stateHTML) elem.bindState(attributes.state || attributes.stateHTML)
   if (elements[tagName]) elements[tagName](elem)
   return elem
 }
 
-function createChildren (children) {
+function createElements (children, parentElement) {
+  parentElement = parentElement || this || document.body
   if (Array.isArray(children) === false) return false
   let childElements = []
   for (let x = 0; x < children.length; x++) {
-    childElements.push(this.createChild(children[x]))
+    childElements.push(createElement(children[x], parentElement))
   }
   return childElements
 }
@@ -47,32 +52,50 @@ function createNode (text, parentElement, id) {
   let node = document.createTextNode(text || '')
   parentElement.appendChild(node)
   if (id) tree.node[id] = node
-  node.bind = bindState
+  node.bindState = bindState
   return node
 }
 
 function bindState (stateKey) {
-  if (tree.state[stateKey] === undefined) {
-    tree.state[stateKey] = {
-      nodes: [this],
-      value: '',
-      get: function () {
-        return this.value
-      },
-      set: function (newValue) {
-        this.value = newValue
-        this.nodes.forEach(node => {
-          node.textContent = newValue
-        })
-      }
-    }
-    return true
-  } else if (Array.isArray(tree.state[stateKey].nodes) === false) {
+  if (State[stateKey] === undefined) {
+    newState(stateKey)
+    State[stateKey].nodes.push(this)
+  } else if (Array.isArray(State[stateKey].nodes) === false) {
     return false
   } else {
-    tree.state[stateKey].nodes.push(this)
+    State[stateKey].nodes.push(this)
+    this.textContent = State[stateKey].value
     return true
   }
 }
 
-export {createElement, createNode, tree}
+function newState (stateKey, stateValue) {
+  State[stateKey] = {
+    nodes: [],
+    value: stateValue || '',
+    get: function () {
+      return this.value
+    },
+    set: function (newValue) {
+      this.value = newValue
+      this.nodes.forEach(node => {
+        if (node.nodeType === 3) node.textContent = newValue
+        else if (node.tagName === 'input') node.value = newValue
+        else if (node.stateHTML) node.innerHTML = newValue
+        else node.innerText = newValue
+      })
+    }
+  }
+  return true
+}
+
+function setState (stateKey, stateValue) {
+  if (State[stateKey] === undefined) newState(stateKey, stateValue)
+  else State[stateKey] = stateValue
+}
+
+function getState (stateKey) {
+  return State[stateKey]
+}
+
+export {createElement, createElements, createNode, tree, setState, getState}
