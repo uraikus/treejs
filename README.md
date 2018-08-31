@@ -10,10 +10,6 @@ Elements are now create with **createElement(tagname :string, attributes :object
   createElement({tagName: 'h2', innerHTML: '<b>Hello World Again!</b>'}, h1)
   let div = createElement() // Default tag is a div, auto appended to body if parent not defined
 ```
-| tagName | attributes | parentElement |
-|--
-| div, dropdown, table, etc | {id: 'whatever', className: 'something', etc} | Any element pointer. |
-| **Default:** div | **Default:** {} | **Default:** document.body |
 Multiple elements can be created at the same time by using **createElements(attributes :object, parentElement :element)**: // *returns array of newly created elements*
 ```Javascript
   createElements([
