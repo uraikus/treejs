@@ -4,7 +4,7 @@
   "description": "TreeJS aims to add state, dynamic element creation, and more in a vanilla Javascript familiar syntax.",
   "main": "tree.js",
   "scripts": {
-    "build": "parcel build src/tree.js -d ./ --out-file tree.js"
+    "build": "parcel build src/tree.js -d ./ --out-file tree.js --no-source-maps"
   },
   "repository": {
     "type": "git",

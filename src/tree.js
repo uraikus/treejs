@@ -1,3 +1,5 @@
+/* global Element */
+
 import elements from './elements'
 
 var tree = {
@@ -8,7 +10,15 @@ var tree = {
 
 var State = {}
 
-function createElement (tagName, attributes, parentElement) {
+function createElement () {
+  let tagName = 'div'
+  let attributes = {}
+  let parentElement = document.body
+  for (let x = 0; x < arguments.length; x++) {
+    if (arguments[x] instanceof Element) parentElement = arguments[x]
+    else if (typeof arguments[x] === 'string') tagName = arguments[x]
+    else if (typeof arguments[x] === 'object') attributes = arguments[x]
+  }
   if (typeof tagName === 'object') {
     parentElement = attributes
     attributes = tagName
@@ -48,7 +58,8 @@ function createElements (children, parentElement) {
 }
 
 function createNode (text, parentElement, id) {
-  parentElement = parentElement || this || document.body
+  if (!id && typeof parentElement === 'string') id = parentElement
+  else if (parentElement instanceof Element === false) parentElement = this || document.body
   let node = document.createTextNode(text || '')
   parentElement.appendChild(node)
   if (id) tree.node[id] = node
