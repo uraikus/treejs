@@ -1,8 +1,8 @@
 /* global Element */
 
-import elements from './elements'
+import ComponentTemplate, {Templates} from './templates'
 
-var tree = {
+var Tree = {
   id: {},
   class: {},
   node: {}
@@ -13,29 +13,24 @@ var State = {}
 function createElement () {
   let tagName = 'div'
   let attributes = {}
-  let parentElement = document.body
+  let parentElement = this || document.body
   for (let x = 0; x < arguments.length; x++) {
     if (arguments[x] instanceof Element) parentElement = arguments[x]
     else if (typeof arguments[x] === 'string') tagName = arguments[x]
     else if (typeof arguments[x] === 'object') attributes = arguments[x]
   }
-  if (typeof tagName === 'object') {
-    parentElement = attributes
-    attributes = tagName
-    if (attributes.tagName) {
-      tagName = attributes.tagName
-      delete attributes.tagName
-    } else tagName = 'div'
-  } else tagName = tagName || 'div'
-  parentElement = parentElement || this || document.body
+  if (attributes.tagName) {
+    tagName = attributes.tagName
+    delete attributes.tagName
+  }
+
   let elem = document.createElement(tagName)
-  if (typeof attributes === 'object' && attributes) Object.assign(elem, attributes)
   if (attributes.id) {
-    tree.id[attributes.id] = elem
+    Tree.id[attributes.id] = elem
   }
   if (attributes.className) {
-    if (Array.isArray(tree.class[attributes.className])) tree.class[attributes.className].push(elem)
-    else tree.class[attributes.className] = [elem]
+    if (Array.isArray(Tree.class[attributes.className])) Tree.class[attributes.className].push(elem)
+    else Tree.class[attributes.className] = [elem]
   }
   parentElement.appendChild(elem)
   elem.createChild = createElement
@@ -43,7 +38,7 @@ function createElement () {
   elem.createTextNode = createNode
   elem.bindState = bindState
   if (attributes.state || attributes.stateHTML) elem.bindState(attributes.state || attributes.stateHTML)
-  if (elements[tagName]) elements[tagName](elem)
+  assignAttributes(elem, attributes)
   return elem
 }
 
@@ -62,7 +57,7 @@ function createNode (text, parentElement, id) {
   else if (parentElement instanceof Element === false) parentElement = this || document.body
   let node = document.createTextNode(text || '')
   parentElement.appendChild(node)
-  if (id) tree.node[id] = node
+  if (id) Tree.node[id] = node
   node.bindState = bindState
   return node
 }
@@ -100,6 +95,53 @@ function newState (stateKey, stateValue) {
   return true
 }
 
+function assignAttributes (elem, attributes) {
+  if (attributes.$) assignParts(elem, attributes.$)
+  if (attributes.template && Templates[attributes.template]) createComponent(elem, attributes.template)
+  delete attributes.$
+  for (let attr in attributes) {
+    if (attributes[attr][0] === '$' && attributes[attr][0].includes(' ') === false) bindPart(elem, attr, attributes[attr])
+    else elem[attr] = attributes[attr]
+  }
+}
+
+function createComponent (elem, template) {
+  assignAttributes(elem, Templates[template].attributes)
+  Templates[template].children.forEach(child => {
+    createElement(child, elem)
+  })
+}
+
+function assignParts (elem, attributes) {
+  elem.$ = {}
+  for (let $ in attributes) {
+    elem.$[$] = {
+      value: attributes[$],
+      nodes: new Map(),
+      get: function () { return true },
+      set: function (newValue) {
+        this.value = newValue
+        for (let [key, value] of this.nodes.entries()) {
+          key[value] = this.value
+        }
+      }
+    }
+  }
+}
+
+function bindPart (elem, key, part) {
+  let parsedPart = part.replace('$', '')
+  let parent = elem.parentElement
+  while ((!parent.$ || !parent.$[parsedPart]) && parent !== document.body) {
+    parent = elem.parentElement
+  }
+  if (parent.$[parsedPart]) {
+    elem[key] = parent.$[parsedPart].value
+    if (parent.$[parsedPart].has(elem)) parent.$[parsedPart].get(elem).push(key)
+    else parent.$[parsedPart].set(elem, [key])
+  }
+}
+
 function setState (stateKey, stateValue) {
   if (State[stateKey] === undefined) newState(stateKey, stateValue)
   else State[stateKey] = stateValue
@@ -109,4 +151,4 @@ function getState (stateKey) {
   return State[stateKey]
 }
 
-export {createElement, createElements, createNode, tree, setState, getState}
+export {createElement, createElements, createNode, Tree, setState, getState, ComponentTemplate}
