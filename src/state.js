@@ -17,10 +17,10 @@ function newState (stateKey, stateValue) {
   State[stateKey] = {
     nodes: [],
     value: stateValue || '',
-    get: function () {
+    get () {
       return this.value
     },
-    set: function (newValue) {
+    set (newValue) {
       this.value = newValue
       this.nodes.forEach(node => {
         if (node.nodeType === 3) node.textContent = newValue

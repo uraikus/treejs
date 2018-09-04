@@ -22,8 +22,8 @@ function assignParts (elem, attributes) {
     elem.$[$] = {
       value: attributes[$],
       nodes: new Map(),
-      get: function () { return true },
-      set: function (newValue) {
+      get () { return true },
+      set (newValue) {
         this.value = newValue
         for (let [key, value] of this.nodes.entries()) {
           key[value] = this.value
