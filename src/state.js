@@ -39,7 +39,7 @@ function setState (stateKey, stateValue) {
 }
 
 function getState (stateKey) {
-  return State[stateKey]
+  return State[stateKey].value
 }
 
 export {setState, getState, bindState}
