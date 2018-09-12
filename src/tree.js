@@ -12,7 +12,7 @@ var Tree = {
 function createElement () {
   let tagName = 'div'
   let attributes = {}
-  let parentElement = this || document.body
+  let parentElement = (this !== window && this) || document.body
   for (let x = 0; x < arguments.length; x++) {
     if (arguments[x] instanceof Element) parentElement = arguments[x]
     else if (typeof arguments[x] === 'string') tagName = arguments[x]
@@ -37,6 +37,7 @@ function createElement () {
   elem.bindState = bindState
   if (attributes.state || attributes.stateHTML) elem.bindState(attributes.state || attributes.stateHTML)
   assignAttributes(elem, attributes)
+  if (typeof elem.afterCreate === 'function') elem.afterCreate()
   return elem
 }
 

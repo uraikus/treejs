@@ -15,6 +15,10 @@ To use in your browser:
   // or
   import Tree, {createElement, ...etc} from '@scriptleaf/treejs'
 ```
+or more classically:
+```html
+  <script src="https://scriptleaf.org/tree.js"></script>
+```
 
 ## Creating elements
 #### createElement(tagName:string, attributes:object, parentElement:htmlNode)
@@ -36,6 +40,16 @@ Arguments will be detected by their type. Allowing you to use them in any order.
   // Default tag is a div, auto appended to body if parent undefined
   let div = createElement()
 ```
+**Note:** You can fire a function after element creation by attaching a function to the key "afterKey" of the elements attributes.
+```JS
+  createElement({afterLoad: alertAfterCreation, innerText: 'You did it!'})
+
+  function alertAfterCreation () {
+    alert(this.innerText)
+  }
+```
+
+
 #### createElements (elementObjects:array, parentElement:element)
 **Returns:** Array of created elements.
 
