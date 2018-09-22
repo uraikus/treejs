@@ -17,7 +17,7 @@ To use in your browser:
 ```
 or more classically:
 ```html
-  <script src="https://scriptleaf.org/tree.js"></script> // Latest
+  <script src="https://scriptleaf.org/~tree.js"></script> // Latest
   <script src="https://scriptleaf.org/tree.v0.0.0.js"></script> // Particular version
 ```
 
