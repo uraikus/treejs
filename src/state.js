@@ -1,20 +1,22 @@
-const State = {}
+import T from 'tree.js'
 
-function bindState (stateKey) {
-  if (State[stateKey] === undefined) {
-    newState(stateKey)
-    State[stateKey].nodes.push(this)
-  } else if (Array.isArray(State[stateKey].nodes) === false) {
+T.State = {}
+
+T.bindState = function (stateKey) {
+  if (T.State[stateKey] === undefined) {
+    T.newState(stateKey)
+    T.State[stateKey].nodes.push(this)
+  } else if (Array.isArray(T.State[stateKey].nodes) === false) {
     return false
   } else {
-    State[stateKey].nodes.push(this)
-    this.textContent = State[stateKey].value
+    T.State[stateKey].nodes.push(this)
+    this.textContent = T.State[stateKey].value
     return true
   }
 }
 
-function newState (stateKey, stateValue) {
-  State[stateKey] = {
+T.newState = function (stateKey, stateValue) {
+  T.State[stateKey] = {
     nodes: [],
     value: stateValue || '',
     get () {
@@ -33,13 +35,13 @@ function newState (stateKey, stateValue) {
   return true
 }
 
-function setState (stateKey, stateValue) {
-  if (State[stateKey] === undefined) newState(stateKey, stateValue)
-  else State[stateKey].set(stateValue)
+T.setState = function (stateKey, stateValue) {
+  if (T.State[stateKey] === undefined) T.newState(stateKey, stateValue)
+  else T.State[stateKey].set(stateValue)
 }
 
-function getState (stateKey) {
-  return State[stateKey].value
+T.getState = function (stateKey) {
+  return T.State[stateKey].value
 }
 
-export { setState, getState, bindState }
+export default T

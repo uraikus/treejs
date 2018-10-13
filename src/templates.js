@@ -1,22 +1,22 @@
-import {createElement} from './tree'
+import T, { createElement } from './tree'
 
-var Templates = {}
+T.Templates = {}
 
-class ComponentTemplate {
+T.ComponentTemplate = class {
   constructor (name, defaultAttributes) {
-    Templates[name] = this
+    T.Templates[name] = this
     this.attributes = defaultAttributes
   }
 }
 
-function createComponent (elem, template) {
-  assignAttributes(elem, Templates[template].attributes)
-  Templates[template].children.forEach(child => {
+T.createComponent = function (elem, template) {
+  T.assignAttributes(elem, T.Templates[template].attributes)
+  T.Templates[template].children.forEach(child => {
     createElement(child, elem)
   })
 }
 
-function assignParts (elem, attributes) {
+T.assignParts = function (elem, attributes) {
   elem.$ = {}
   for (let $ in attributes) {
     elem.$[$] = {
@@ -33,7 +33,7 @@ function assignParts (elem, attributes) {
   }
 }
 
-function bindPart (elem, key, part) {
+T.bindPart = function (elem, key, part) {
   let parsedPart = part.replace('$', '')
   let parent = elem.parentElement
   while ((!parent.$ || !parent.$[parsedPart]) && parent !== document.body) {
@@ -46,15 +46,15 @@ function bindPart (elem, key, part) {
   }
 }
 
-function assignAttributes (elem, attributes) {
-  if (attributes.$) assignParts(elem, attributes.$)
-  if (attributes.template && Templates[attributes.template]) createComponent(elem, attributes.template)
+T.assignAttributes = function (elem, attributes) {
+  if (attributes.$) T.assignParts(elem, attributes.$)
+  if (attributes.template && T.Templates[attributes.template]) T.createComponent(elem, attributes.template)
   delete attributes.$
   for (let attr in attributes) {
     if (attr === 'tagName') continue
-    if (attributes[attr][0] === '$' && attributes[attr][0].includes(' ') === false) bindPart(elem, attr, attributes[attr])
+    if (attributes[attr][0] === '$' && attributes[attr][0].includes(' ') === false) T.bindPart(elem, attr, attributes[attr])
     else elem[attr] = attributes[attr]
   }
 }
 
-export {assignAttributes, ComponentTemplate}
+export default T

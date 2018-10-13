@@ -1,15 +1,15 @@
 /* global Element */
 
-import {assignAttributes, ComponentTemplate} from './templates'
-import {setState, getState, bindState} from './state'
+import { assignAttributes } from './templates'
+import { bindState } from './state'
 
-var Tree = {
+var T = {
   id: {},
   class: {},
   node: {}
 }
 
-function createElement () {
+T.createElement = function () {
   let tagName = 'div'
   let attributes = {}
   let parentElement = (this !== window && this) || document.body
@@ -24,16 +24,15 @@ function createElement () {
 
   let elem = document.createElement(tagName)
   if (attributes.id) {
-    Tree.id[attributes.id] = elem
+    T.id[attributes.id] = elem
   }
   if (attributes.className) {
-    if (Array.isArray(Tree.class[attributes.className])) Tree.class[attributes.className].push(elem)
-    else Tree.class[attributes.className] = [elem]
+    if (Array.isArray(T.class[attributes.className])) T.class[attributes.className].push(elem)
+    else T.class[attributes.className] = [elem]
   }
   parentElement.appendChild(elem)
-  elem.createChild = createElement
-  elem.createChildren = createElements
-  elem.createTextNode = createNode
+  elem.createChild = T.createElement
+  elem.createChildren = T.createElements
   elem.bindState = bindState
   if (attributes.state || attributes.stateHTML) elem.bindState(attributes.state || attributes.stateHTML)
   assignAttributes(elem, attributes)
@@ -41,24 +40,14 @@ function createElement () {
   return elem
 }
 
-function createElements (children, parentElement) {
+T.createElements = function (children, parentElement) {
   parentElement = parentElement || this || document.body
   if (Array.isArray(children) === false) return false
   let childElements = []
   for (let x = 0; x < children.length; x++) {
-    childElements.push(createElement(children[x], parentElement))
+    childElements.push(T.createElement(children[x], parentElement))
   }
   return childElements
 }
 
-function createNode (text, parentElement, id) {
-  if (!id && typeof parentElement === 'string') id = parentElement
-  else if (parentElement instanceof Element === false) parentElement = this || document.body
-  let node = document.createTextNode(text || '')
-  parentElement.appendChild(node)
-  if (id) Tree.node[id] = node
-  node.bindState = bindState
-  return node
-}
-
-export {createElement, createElements, createNode, Tree, setState, getState, ComponentTemplate}
+export default T

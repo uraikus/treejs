@@ -4,7 +4,7 @@ var Tree = {
   node: {}
 }
 
-function createElement () {
+Tree.createElement = function () {
   let tagName = 'div'
   let attributes = {}
   let parentElement = (this !== window && this) || document.body
@@ -149,9 +149,9 @@ function newState (stateKey, stateValue) {
 
 function setState (stateKey, stateValue) {
   if (State[stateKey] === undefined) newState(stateKey, stateValue)
-  else State[stateKey] = stateValue
+  else State[stateKey].set(stateValue)
 }
 
 function getState (stateKey) {
-  return State[stateKey].value
+  return State[stateKey].get()
 }
