@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/tree.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">src</a> tree.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">55.26% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>21/38</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">40% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>12/30</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">64.52% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>20/31</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* global Element */
+&nbsp;
+import T from './T'
+import './templates'
+import './state'
+&nbsp;
+T.createElement = function () {
+  let tagName = 'div'
+  let attributes = {}
+  let parentElement = (this !== window &amp;&amp; this instanceof Element) || document.body
+  for (let x = 0; x &lt; arguments.length; x++) {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (arguments[x] instanceof Element) <span class="cstat-no" title="statement not covered" >parentElement = arguments[x]</span>
+    else <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof arguments[x] === 'string') tagName = arguments[x]
+    else <span class="cstat-no" title="statement not covered" >if (typeof arguments[x] === 'object') <span class="cstat-no" title="statement not covered" >attributes = arguments[x]</span></span>
+  }
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (attributes.tagName) {
+<span class="cstat-no" title="statement not covered" >    tagName = attributes.tagName</span>
+  }
+&nbsp;
+  let elem = document.createElement(tagName)
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (attributes.id) {
+<span class="cstat-no" title="statement not covered" >    T.id[attributes.id] = elem</span>
+  }
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (attributes.className) {
+<span class="cstat-no" title="statement not covered" >    if (Array.isArray(T.class[attributes.className])) <span class="cstat-no" title="statement not covered" >T.class[attributes.className].push(elem)</span></span>
+    else <span class="cstat-no" title="statement not covered" >T.class[attributes.className] = [elem]</span>
+  }
+  parentElement.appendChild(elem)
+  elem.createChild = T.createElement
+  elem.createChildren = T.createElements
+  elem.bindState = T.bindState
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (attributes.state || attributes.stateHTML) <span class="cstat-no" title="statement not covered" >elem.bindState(attributes.state || attributes.stateHTML)</span>
+  T.assignAttributes(elem, attributes)
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof elem.afterCreate === 'function') <span class="cstat-no" title="statement not covered" >elem.afterCreate()</span>
+  return elem
+}
+&nbsp;
+T.createElements = <span class="fstat-no" title="function not covered" >fu</span>nction (children, parentElement) {
+<span class="cstat-no" title="statement not covered" >  parentElement = parentElement || this || document.body</span>
+<span class="cstat-no" title="statement not covered" >  if (Array.isArray(children) === false) <span class="cstat-no" title="statement not covered" >return false</span></span>
+  let childElements = <span class="cstat-no" title="statement not covered" >[]</span>
+<span class="cstat-no" title="statement not covered" >  for (let x = 0; x &lt; children.length; x++) {</span>
+<span class="cstat-no" title="statement not covered" >    childElements.push(T.createElement(children[x], parentElement))</span>
+  }
+<span class="cstat-no" title="statement not covered" >  return childElements</span>
+}
+&nbsp;
+export default T
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Oct 13 2018 11:39:15 GMT-0400 (Eastern Daylight Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

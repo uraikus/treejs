@@ -1,4 +1,4 @@
-import T from './tree'
+import T from './T'
 
 T.Templates = {}
 

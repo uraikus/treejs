@@ -1,18 +1,13 @@
 /* global Element */
 
-import { assignAttributes } from './templates'
-import { bindState } from './state'
-
-var T = {
-  id: {},
-  class: {},
-  node: {}
-}
+import T from './T'
+import './templates'
+import './state'
 
 T.createElement = function () {
   let tagName = 'div'
   let attributes = {}
-  let parentElement = (this !== window && this) || document.body
+  let parentElement = (this !== window && this instanceof Element) || document.body
   for (let x = 0; x < arguments.length; x++) {
     if (arguments[x] instanceof Element) parentElement = arguments[x]
     else if (typeof arguments[x] === 'string') tagName = arguments[x]
@@ -33,9 +28,9 @@ T.createElement = function () {
   parentElement.appendChild(elem)
   elem.createChild = T.createElement
   elem.createChildren = T.createElements
-  elem.bindState = bindState
+  elem.bindState = T.bindState
   if (attributes.state || attributes.stateHTML) elem.bindState(attributes.state || attributes.stateHTML)
-  assignAttributes(elem, attributes)
+  T.assignAttributes(elem, attributes)
   if (typeof elem.afterCreate === 'function') elem.afterCreate()
   return elem
 }

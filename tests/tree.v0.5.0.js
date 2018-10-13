@@ -1,10 +1,10 @@
 /* global Element */
-var T = {
+var Tree = {
 id: {},
 class: {},
 node: {}
 }
-T.createElement = function () {
+function createElement () {
 let tagName = 'div'
 let attributes = {}
 let parentElement = (this !== window && this) || document.body
@@ -18,45 +18,55 @@ tagName = attributes.tagName
 }
 let elem = document.createElement(tagName)
 if (attributes.id) {
-T.id[attributes.id] = elem
+Tree.id[attributes.id] = elem
 }
 if (attributes.className) {
-if (Array.isArray(T.class[attributes.className])) T.class[attributes.className].push(elem)
-else T.class[attributes.className] = [elem]
+if (Array.isArray(Tree.class[attributes.className])) Tree.class[attributes.className].push(elem)
+else Tree.class[attributes.className] = [elem]
 }
 parentElement.appendChild(elem)
-elem.createChild = T.createElement
-elem.createChildren = T.createElements
+elem.createChild = createElement
+elem.createChildren = createElements
+elem.createTextNode = createNode
 elem.bindState = bindState
 if (attributes.state || attributes.stateHTML) elem.bindState(attributes.state || attributes.stateHTML)
 assignAttributes(elem, attributes)
 if (typeof elem.afterCreate === 'function') elem.afterCreate()
 return elem
 }
-T.createElements = function (children, parentElement) {
+function createElements (children, parentElement) {
 parentElement = parentElement || this || document.body
 if (Array.isArray(children) === false) return false
 let childElements = []
 for (let x = 0; x < children.length; x++) {
-childElements.push(T.createElement(children[x], parentElement))
+childElements.push(createElement(children[x], parentElement))
 }
 return childElements
 }
+function createNode (text, parentElement, id) {
+if (!id && typeof parentElement === 'string') id = parentElement
+else if (parentElement instanceof Element === false) parentElement = this || document.body
+let node = document.createTextNode(text || '')
+parentElement.appendChild(node)
+if (id) Tree.node[id] = node
+node.bindState = bindState
+return node
+}
 
-T.Templates = {}
-T.ComponentTemplate = class {
+var Templates = {}
+class ComponentTemplate {
 constructor (name, defaultAttributes) {
-T.Templates[name] = this
+Templates[name] = this
 this.attributes = defaultAttributes
 }
 }
-T.createComponent = function (elem, template) {
-T.assignAttributes(elem, T.Templates[template].attributes)
-T.Templates[template].children.forEach(child => {
-T.createElement(child, elem)
+function createComponent (elem, template) {
+assignAttributes(elem, Templates[template].attributes)
+Templates[template].children.forEach(child => {
+createElement(child, elem)
 })
 }
-T.assignParts = function (elem, attributes) {
+function assignParts (elem, attributes) {
 elem.$ = {}
 for (let $ in attributes) {
 elem.$[$] = {
@@ -72,7 +82,7 @@ key[value] = this.value
 }
 }
 }
-T.bindPart = function (elem, key, part) {
+function bindPart (elem, key, part) {
 let parsedPart = part.replace('$', '')
 let parent = elem.parentElement
 while ((!parent.$ || !parent.$[parsedPart]) && parent !== document.body) {
@@ -84,32 +94,31 @@ if (parent.$[parsedPart].nodes.has(elem)) parent.$[parsedPart].nodes.get(elem).p
 else parent.$[parsedPart].nodes.set(elem, [key])
 }
 }
-T.assignAttributes = function (elem, attributes) {
-if (attributes.$) T.assignParts(elem, attributes.$)
-if (attributes.template && T.Templates[attributes.template]) T.createComponent(elem, attributes.template)
+function assignAttributes (elem, attributes) {
+if (attributes.$) assignParts(elem, attributes.$)
+if (attributes.template && Templates[attributes.template]) createComponent(elem, attributes.template)
 delete attributes.$
 for (let attr in attributes) {
 if (attr === 'tagName') continue
-if (attributes[attr][0] === '$' && attributes[attr][0].includes(' ') === false) T.bindPart(elem, attr, attributes[attr])
+if (attributes[attr][0] === '$' && attributes[attr][0].includes(' ') === false) bindPart(elem, attr, attributes[attr])
 else elem[attr] = attributes[attr]
 }
 }
-
-T.State = {}
-T.bindState = function (stateKey) {
-if (T.State[stateKey] === undefined) {
-T.newState(stateKey)
-T.State[stateKey].nodes.push(this)
-} else if (Array.isArray(T.State[stateKey].nodes) === false) {
+const State = {}
+function bindState (stateKey) {
+if (State[stateKey] === undefined) {
+newState(stateKey)
+State[stateKey].nodes.push(this)
+} else if (Array.isArray(State[stateKey].nodes) === false) {
 return false
 } else {
-T.State[stateKey].nodes.push(this)
-this.textContent = T.State[stateKey].value
+State[stateKey].nodes.push(this)
+this.textContent = State[stateKey].value
 return true
 }
 }
-T.newState = function (stateKey, stateValue) {
-T.State[stateKey] = {
+function newState (stateKey, stateValue) {
+State[stateKey] = {
 nodes: [],
 value: stateValue || '',
 get () {
@@ -127,10 +136,10 @@ else node.innerText = newValue
 }
 return true
 }
-T.setState = function (stateKey, stateValue) {
-if (T.State[stateKey] === undefined) T.newState(stateKey, stateValue)
-else T.State[stateKey].set(stateValue)
+function setState (stateKey, stateValue) {
+if (State[stateKey] === undefined) newState(stateKey, stateValue)
+else State[stateKey].set(stateValue)
 }
-T.getState = function (stateKey) {
-return T.State[stateKey].value
+function getState (stateKey) {
+return State[stateKey].value
 }

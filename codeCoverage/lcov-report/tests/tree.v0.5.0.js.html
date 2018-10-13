@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for tests/tree.v0.5.0.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">tests</a> tree.v0.5.0.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/109</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/77</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/89</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* global Element */
+var Tree = <span class="cstat-no" title="statement not covered" >{</span>
+id: {},
+class: {},
+node: {}
+}
+function <span class="fstat-no" title="function not covered" >createElement () {</span>
+let tagName = <span class="cstat-no" title="statement not covered" >'div'</span>
+let attributes = <span class="cstat-no" title="statement not covered" >{}</span>
+let parentElement = (<span class="cstat-no" title="statement not covered" >this !== window &amp;&amp; this) || document.body</span>
+<span class="cstat-no" title="statement not covered" >for (let x = 0; x &lt; arguments.length; x++) {</span>
+<span class="cstat-no" title="statement not covered" >if (arguments[x] instanceof Element) <span class="cstat-no" title="statement not covered" >parentElement = arguments[x]</span></span>
+else <span class="cstat-no" title="statement not covered" >if (typeof arguments[x] === 'string') <span class="cstat-no" title="statement not covered" >tagName = arguments[x]</span></span>
+else <span class="cstat-no" title="statement not covered" >if (typeof arguments[x] === 'object') <span class="cstat-no" title="statement not covered" >a</span>ttributes = arguments[x]</span>
+}
+<span class="cstat-no" title="statement not covered" >if (attributes.tagName) {</span>
+<span class="cstat-no" title="statement not covered" >tagName = attributes.tagName</span>
+}
+let elem = <span class="cstat-no" title="statement not covered" >document.createElement(tagName)</span>
+<span class="cstat-no" title="statement not covered" >if (attributes.id) {</span>
+<span class="cstat-no" title="statement not covered" >Tree.id[attributes.id] = elem</span>
+}
+<span class="cstat-no" title="statement not covered" >if (attributes.className) {</span>
+<span class="cstat-no" title="statement not covered" >if (Array.isArray(Tree.class[attributes.className])) <span class="cstat-no" title="statement not covered" >Tree.class[attributes.className].push(elem)</span></span>
+else <span class="cstat-no" title="statement not covered" >Tree.class[attributes.className] = [elem]</span>
+}
+<span class="cstat-no" title="statement not covered" >parentElement.appendChild(elem)</span>
+<span class="cstat-no" title="statement not covered" >elem.createChild = createElement</span>
+<span class="cstat-no" title="statement not covered" >elem.createChildren = createElements</span>
+<span class="cstat-no" title="statement not covered" >elem.createTextNode = createNode</span>
+<span class="cstat-no" title="statement not covered" >elem.bindState = bindState</span>
+<span class="cstat-no" title="statement not covered" >if (attributes.state || attributes.stateHTML) <span class="cstat-no" title="statement not covered" >e</span>lem.bindState(attributes.state || attributes.stateHTML)</span>
+<span class="cstat-no" title="statement not covered" >assignAttributes(elem, attributes)</span>
+<span class="cstat-no" title="statement not covered" >if (typeof elem.afterCreate === 'function') <span class="cstat-no" title="statement not covered" >e</span>lem.afterCreate()</span>
+<span class="cstat-no" title="statement not covered" >return elem</span>
+}
+function <span class="fstat-no" title="function not covered" >createElements (children, parentElement) {</span>
+<span class="cstat-no" title="statement not covered" >parentElement = parentElement || this || document.body</span>
+<span class="cstat-no" title="statement not covered" >if (Array.isArray(children) === false) <span class="cstat-no" title="statement not covered" >r</span>eturn false</span>
+let childElements = <span class="cstat-no" title="statement not covered" >[]</span>
+<span class="cstat-no" title="statement not covered" >for (let x = 0; x &lt; children.length; x++) {</span>
+<span class="cstat-no" title="statement not covered" >childElements.push(createElement(children[x], parentElement))</span>
+}
+<span class="cstat-no" title="statement not covered" >return childElements</span>
+}
+function <span class="fstat-no" title="function not covered" >createNode (text, parentElement, id) {</span>
+<span class="cstat-no" title="statement not covered" >if (!id &amp;&amp; typeof parentElement === 'string') <span class="cstat-no" title="statement not covered" >id = parentElement</span></span>
+else <span class="cstat-no" title="statement not covered" >if (parentElement instanceof Element === false) <span class="cstat-no" title="statement not covered" >p</span>arentElement = this || document.body</span>
+let node = <span class="cstat-no" title="statement not covered" >document.createTextNode(text || '')</span>
+<span class="cstat-no" title="statement not covered" >parentElement.appendChild(node)</span>
+<span class="cstat-no" title="statement not covered" >if (id) <span class="cstat-no" title="statement not covered" >T</span>ree.node[id] = node</span>
+<span class="cstat-no" title="statement not covered" >node.bindState = bindState</span>
+<span class="cstat-no" title="statement not covered" >return node</span>
+}
+&nbsp;
+var Templates = <span class="cstat-no" title="statement not covered" >{}</span>
+class ComponentTemplate {
+constructor (name, defaultAttributes) <span class="cstat-no" title="statement not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >Templates[name] = this</span>
+<span class="cstat-no" title="statement not covered" >this.attributes = defaultAttributes</span>
+}
+}
+function <span class="fstat-no" title="function not covered" >createComponent (elem, template) {</span>
+<span class="cstat-no" title="statement not covered" >assignAttributes(elem, Templates[template].attributes)</span>
+<span class="cstat-no" title="statement not covered" >Templates[template].children.forEach(<span class="fstat-no" title="function not covered" >child =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >createElement(child, elem)</span>
+})
+}
+function <span class="fstat-no" title="function not covered" >assignParts (elem, attributes) {</span>
+<span class="cstat-no" title="statement not covered" >elem.$ = {}</span>
+<span class="cstat-no" title="statement not covered" >for (let $ in attributes) {</span>
+<span class="cstat-no" title="statement not covered" >elem.$[$] = <span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" >{</span></span></span>
+value: attributes[$],
+nodes: new Map(),
+get () { <span class="cstat-no" title="statement not covered" >return true },</span>
+set (newValue) <span class="cstat-no" title="statement not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >this.value = newValue</span>
+<span class="cstat-no" title="statement not covered" >for (let [key, value] of this.nodes.entries()) <span class="cstat-no" title="statement not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >key[value] = this.value</span>
+}
+}
+}
+}
+}
+function <span class="fstat-no" title="function not covered" >bindPart (elem, key, part) {</span>
+let parsedPart = <span class="cstat-no" title="statement not covered" >part.replace('$', '')</span>
+let parent = <span class="cstat-no" title="statement not covered" >elem.parentElement</span>
+<span class="cstat-no" title="statement not covered" >while ((!parent.$ || !parent.$[parsedPart]) &amp;&amp; parent !== document.body) {</span>
+<span class="cstat-no" title="statement not covered" >parent = elem.parentElement</span>
+}
+<span class="cstat-no" title="statement not covered" >if (parent.$[parsedPart]) {</span>
+<span class="cstat-no" title="statement not covered" >elem[key] = parent.$[parsedPart].value</span>
+<span class="cstat-no" title="statement not covered" >if (parent.$[parsedPart].nodes.has(elem)) <span class="cstat-no" title="statement not covered" >parent.$[parsedPart].nodes.get(elem).push(key)</span></span>
+else <span class="cstat-no" title="statement not covered" >parent.$[parsedPart].nodes.set(elem, [key])</span>
+}
+}
+function <span class="fstat-no" title="function not covered" >assignAttributes (elem, attributes) {</span>
+<span class="cstat-no" title="statement not covered" >if (attributes.$) <span class="cstat-no" title="statement not covered" >a</span>ssignParts(elem, attributes.$)</span>
+<span class="cstat-no" title="statement not covered" >if (attributes.template &amp;&amp; Templates[attributes.template]) <span class="cstat-no" title="statement not covered" >c</span>reateComponent(elem, attributes.template)</span>
+<span class="cstat-no" title="statement not covered" >delete attributes.$</span>
+<span class="cstat-no" title="statement not covered" >for (let attr in attributes) {</span>
+<span class="cstat-no" title="statement not covered" >if (attr === 'tagName') <span class="cstat-no" title="statement not covered" >c</span>ontinue</span>
+<span class="cstat-no" title="statement not covered" >if (attributes[attr][0] === '$' &amp;&amp; attributes[attr][0].includes(' ') === false) <span class="cstat-no" title="statement not covered" >bindPart(elem, attr, attributes[attr])</span></span>
+else <span class="cstat-no" title="statement not covered" >elem[attr] = attributes[attr]</span>
+}
+}
+const State = <span class="cstat-no" title="statement not covered" >{}</span>
+function <span class="fstat-no" title="function not covered" >bindState (stateKey) {</span>
+<span class="cstat-no" title="statement not covered" >if (State[stateKey] === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >newState(stateKey)</span>
+<span class="cstat-no" title="statement not covered" >State[stateKey].nodes.push(this)</span>
+} else <span class="cstat-no" title="statement not covered" >if (Array.isArray(State[stateKey].nodes) === false) {</span>
+<span class="cstat-no" title="statement not covered" >return false</span>
+} else {
+<span class="cstat-no" title="statement not covered" >State[stateKey].nodes.push(this)</span>
+<span class="cstat-no" title="statement not covered" >this.textContent = State[stateKey].value</span>
+<span class="cstat-no" title="statement not covered" >return true</span>
+}
+}
+function <span class="fstat-no" title="function not covered" >newState (stateKey, stateValue) {</span>
+<span class="cstat-no" title="statement not covered" >State[stateKey] = <span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" >{</span></span></span>
+nodes: [],
+value: stateValue || '',
+get () {
+<span class="cstat-no" title="statement not covered" >return this.value</span>
+},
+set (newValue) {
+<span class="cstat-no" title="statement not covered" >this.value = newValue</span>
+<span class="cstat-no" title="statement not covered" >this.nodes.forEach(<span class="fstat-no" title="function not covered" >node =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >if (node.nodeType === 3) <span class="cstat-no" title="statement not covered" >node.textContent = newValue</span></span>
+else <span class="cstat-no" title="statement not covered" >if (node.tagName === 'input') <span class="cstat-no" title="statement not covered" >node.value = newValue</span></span>
+else <span class="cstat-no" title="statement not covered" >if (node.innerHTML !== undefined) <span class="cstat-no" title="statement not covered" >node.innerHTML = newValue</span></span>
+else <span class="cstat-no" title="statement not covered" >node.innerText = newValue</span>
+})
+}
+}
+<span class="cstat-no" title="statement not covered" >return true</span>
+}
+function <span class="fstat-no" title="function not covered" >setState (stateKey, stateValue) {</span>
+<span class="cstat-no" title="statement not covered" >if (State[stateKey] === undefined) <span class="cstat-no" title="statement not covered" >newState(stateKey, stateValue)</span></span>
+else <span class="cstat-no" title="statement not covered" >State[stateKey].set(stateValue)</span>
+}
+function <span class="fstat-no" title="function not covered" >getState (stateKey) {</span>
+<span class="cstat-no" title="statement not covered" >return State[stateKey].value</span>
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Oct 13 2018 11:37:29 GMT-0400 (Eastern Daylight Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

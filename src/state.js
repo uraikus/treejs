@@ -1,4 +1,4 @@
-import T from 'tree.js'
+import T from './T'
 
 T.State = {}
 
