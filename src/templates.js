@@ -1,4 +1,4 @@
-import T, { createElement } from './tree'
+import T from './tree'
 
 T.Templates = {}
 
@@ -12,7 +12,7 @@ T.ComponentTemplate = class {
 T.createComponent = function (elem, template) {
   T.assignAttributes(elem, T.Templates[template].attributes)
   T.Templates[template].children.forEach(child => {
-    createElement(child, elem)
+    T.createElement(child, elem)
   })
 }
 

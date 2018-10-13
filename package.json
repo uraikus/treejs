@@ -2,7 +2,7 @@
   "name": "@scriptleaf/treejs",
   "version": "1.0.0",
   "description": "TreeJS aims to add state, dynamic element creation, and more in a vanilla Javascript familiar syntax.",
-  "main": "tree.js",
+  "main": "src/tree.js",
   "scripts": {
     "build": "node ./devscripts/packager.js"
   },
