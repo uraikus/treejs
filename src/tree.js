@@ -7,7 +7,7 @@ import './state'
 T.createElement = function () {
   let tagName = 'div'
   let attributes = {}
-  let parentElement = (this !== window && this instanceof Element) || document.body
+  let parentElement = (this !== window && this instanceof Element && this) || document.body
   for (let x = 0; x < arguments.length; x++) {
     if (arguments[x] instanceof Element) parentElement = arguments[x]
     else if (typeof arguments[x] === 'string') tagName = arguments[x]
@@ -36,7 +36,7 @@ T.createElement = function () {
 }
 
 T.createElements = function (children, parentElement) {
-  parentElement = parentElement || this || document.body
+  parentElement = parentElement || (this !== window && this instanceof Element && this) || document.body
   if (Array.isArray(children) === false) return false
   let childElements = []
   for (let x = 0; x < children.length; x++) {
